@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     'chart',
     'history'
 ]
+TIME_ZONE = 'Asia/Seoul'
 
+USE_TZ = True
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -77,8 +79,12 @@ WSGI_APPLICATION = 'webclient.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', # mysqlclient librarly 설치
+        'NAME': 'Investar',
+        'USER': 'root',
+        'PASSWORD': 'apple10g', # mariaDB 설치 시 입력한 root 비밀번호 입력
+        'HOST': 'localhost',
+        'PORT': ''
     }
 }
 
