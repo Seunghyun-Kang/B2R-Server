@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chart',
-    'history'
+    'history',
+    'chartdetail'
 ]
 TIME_ZONE = 'Asia/Seoul'
 
