@@ -10,6 +10,7 @@ class CompanyInfo(models.Model):
     class Meta:
         managed = False
         db_table = 'company_info'
+        unique_together = (('code', 'company'),)
 
 
 class DailyPrice(models.Model):
@@ -25,4 +26,3 @@ class DailyPrice(models.Model):
     class Meta:
         managed = False
         db_table = 'daily_price'
-        unique_together = (('code', 'date'),)
