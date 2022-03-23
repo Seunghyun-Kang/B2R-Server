@@ -25,7 +25,8 @@ SECRET_KEY = 'django-insecure-xf3lj4en!jt!*fli2-pszor-x+9qq^4#^5$wfnz747058k9yh@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#Seunghyun Ubuntu IP
+ALLOWED_HOSTS = ['3.35.220.148']
 
 
 # Application definition
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chart',
+    'restframework'
 ]
 TIME_ZONE = 'Asia/Seoul'
 
