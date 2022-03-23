@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-xf3lj4en!jt!*fli2-pszor-x+9qq^4#^5$wfnz747058k9yh@
 DEBUG = True
 
 #Seunghyun Ubuntu IP
-ALLOWED_HOSTS = ['3.35.220.148']
+ALLOWED_HOSTS = ['3.35.220.148', 'localhost']
 
 
 # Application definition
@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chart',
-    'restframework'
+    'main',
+    'rest_framework'
 ]
 TIME_ZONE = 'Asia/Seoul'
 
