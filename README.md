@@ -1,2 +1,2 @@
-# BeRich-client
-BeRich web client
+# BeRich-Rest API Server
+BeRich Rest API Server
