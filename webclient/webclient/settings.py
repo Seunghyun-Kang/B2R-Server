@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-xf3lj4en!jt!*fli2-pszor-x+9qq^4#^5$wfnz747058k9yh@
 DEBUG = True
 
 #Seunghyun Ubuntu IP
-ALLOWED_HOSTS = ['3.35.220.148', 'localhost']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,13 +38,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'main',
-    'rest_framework'
+    'rest_framework',
 ]
 TIME_ZONE = 'Asia/Seoul'
 
 USE_TZ = True
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -81,13 +83,20 @@ WSGI_APPLICATION = 'webclient.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # mysqlclient librarly 설치
-        'NAME': 'Investar',
+        'NAME': 'INVESTAR',
         'USER': 'root',
         'PASSWORD': 'apple10g', # mariaDB 설치 시 입력한 root 비밀번호 입력
         'HOST': 'localhost',
         'PORT': ''
     }
 }
+
+#For develop mode
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_HEADERS = ['*']
+#For production mode
+#CORS_ORIGIN_ALLOW_ALL = False
+#CORS_ORIGIN_WHITELIST = []
 
 
 # Password validation
