@@ -32,12 +32,12 @@ def getCompanyByCode(request, pk):
 @api_view(['GET'])
 def getAllCompanies(request):
     try:
-        companies = CompanyInfo.objects.all()
+        companies = pd.DataFrame(list(CompanyInfo.objects.all()))
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serialier = AllCompanySerializer(companies)
-    return Response(serialier.data)
+    json = df.to_json(orient='records')
+    return Response(json)
     #return Response(serialier.data)
 
 @api_view(['GET'])
