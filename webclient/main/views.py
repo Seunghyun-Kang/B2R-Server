@@ -30,7 +30,18 @@ def getCompanyByCode(request, pk):
     #return Response(serialier.data)
 
 @api_view(['GET'])
-def getPriceByCode(request, pk):
+def getAllCompanies(request):
+    try:
+        companies = CompanyInfo.objects.all()
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serialier = CompanySerializer(companies)
+    return Response(serialier.data)
+    #return Response(serialier.data)
+
+@api_view(['GET'])
+def getPricesByCode(request, pk):
     try:
         prices = DailyPrice.objects.filter(pk=pk)
         df = read_frame(prices)
