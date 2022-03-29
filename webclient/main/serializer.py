@@ -1,5 +1,10 @@
 from rest_framework import serializers
-from .models import DailyPrice, CompanyInfo
+from .models import DailyPrice, CompanyInfo, AllCompanies
+
+class AllCompanySerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = AllCompanies
+        fields = ('__all__')
 
 class CompanySerializer(serializers.ModelSerializer):
     class Meta: 

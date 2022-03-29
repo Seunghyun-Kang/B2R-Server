@@ -1,6 +1,14 @@
 from django.db import models
 
 # Create your models here.
+class AllCompanies(models.Model):
+    code = models.CharField(max_length=20)
+    company = models.CharField(max_length=40, blank=True, null=True)
+    last_update = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'company_info'
 
 class CompanyInfo(models.Model):
     code = models.CharField(primary_key=True, max_length=20)

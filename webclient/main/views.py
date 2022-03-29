@@ -1,6 +1,6 @@
 from .models import CompanyInfo, DailyPrice
 from rest_framework import viewsets, status
-from .serializer import PriceSerializer, CompanySerializer
+from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import logging
@@ -36,7 +36,7 @@ def getAllCompanies(request):
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serialier = CompanySerializer(companies)
+    serialier = AllCompanySerializer(companies)
     return Response(serialier.data)
     #return Response(serialier.data)
 
