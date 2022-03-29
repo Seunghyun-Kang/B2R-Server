@@ -1,4 +1,4 @@
-from .models import CompanyInfo, DailyPrice
+from .models import CompanyInfo, DailyPrice, AllCompanies
 from rest_framework import viewsets, status
 from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer
 from rest_framework.decorators import api_view
@@ -32,7 +32,7 @@ def getCompanyByCode(request, pk):
 @api_view(['GET'])
 def getAllCompanies(request):
     try:
-        companies = pd.DataFrame(list(CompanyInfo.objects.all()))
+        companies = pd.DataFrame(list(AllCompanies.objects.all()))
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
