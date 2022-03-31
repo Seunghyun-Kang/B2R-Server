@@ -8,6 +8,7 @@ from django_pandas.io import read_frame
 from .modules import PortfolioOptimization as po
 import pandas as pd
 from functools import reduce
+from numpyencoder import NumpyEncoder
 
 # Create your views here.
 class CompanyViewSet(viewsets.ModelViewSet):
@@ -90,5 +91,5 @@ def getOptPortfolio(request):
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
-    json = result.to_json(orient='records')
-    return Response(json)
+    jsonData = result.to_json(orient='records')
+    return Response(jsonData)
