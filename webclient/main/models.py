@@ -34,3 +34,18 @@ class DailyPrice(models.Model):
     class Meta:
         managed = False
         db_table = 'daily_price'
+
+class BollingerInfo(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    ma20 = models.FloatField(blank=True, null=True)
+    stddev = models.FloatField(blank=True, null=True)
+    upper = models.BigIntegerField(blank=True, null=True)
+    lower = models.BigIntegerField(blank=True, null=True)
+    pb = models.FloatField(blank=True, null=True)
+    bandwidth = models.FloatField(blank=True, null=True)
+    mfi10 = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'bollinger_info'

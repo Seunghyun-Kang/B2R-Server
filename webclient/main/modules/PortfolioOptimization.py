@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 
 def getOptPortfolio(codeArray, prices):
+    print("!!!!!!!!!!!!!")
+    print(codeArray)
     filtered = prices.query("date >= '2018-04-27'")
     filtered=filtered.drop(['date'], axis=1)
 

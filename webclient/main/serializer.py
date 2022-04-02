@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DailyPrice, CompanyInfo, AllCompanies
+from .models import DailyPrice, CompanyInfo, AllCompanies, BollingerInfo
 
 class AllCompanySerializer(serializers.ModelSerializer):
     class Meta: 
@@ -14,4 +14,9 @@ class CompanySerializer(serializers.ModelSerializer):
 class PriceSerializer(serializers.ModelSerializer):
     class Meta:
         model = DailyPrice
+        fields = ('__all__')
+
+class BollingerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BollingerInfo
         fields = ('__all__')
