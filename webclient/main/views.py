@@ -97,7 +97,7 @@ def getOptPortfolio(request):
 def getBollingerByCode(request, pk):
     try:
         info = BollingerInfo.objects.filter(pk=pk)
-        serializer = CompanySerializer(info, many=True)
+        serializer = BollingerSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
