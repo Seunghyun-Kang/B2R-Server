@@ -45,7 +45,7 @@ class BollingerInfo(models.Model):
     pb = models.FloatField(blank=True, null=True)
     bandwidth = models.FloatField(blank=True, null=True)
     mfi10 = models.FloatField(blank=True, null=True)
-
+    iip21 = models.FloatField(blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'bollinger_info'

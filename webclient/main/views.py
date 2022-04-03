@@ -9,7 +9,6 @@ from .modules import PortfolioOptimization as po
 import pandas as pd
 from functools import reduce
 
-# Create your views here.
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = CompanyInfo.objects.all()
     serializer_class = CompanySerializer
@@ -27,10 +26,8 @@ def getCompanyByCode(request, pk):
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    #serialier = CompanySerializer(company)
     a = {column: values[0] for column, values in company.to_dict().items(orient='list')}
     return Response(a)
-    #return Response(serialier.data)
 
 @api_view(['GET'])
 def getAllCompanies(request):
@@ -40,9 +37,7 @@ def getAllCompanies(request):
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    #json = df.to_json(orient='records')
     return Response(serializer.data)
-    #return Response(serialier.data)
 
 @api_view(['GET'])
 def getPricesByCode(request, pk):
@@ -55,16 +50,12 @@ def getPricesByCode(request, pk):
     
     json = df.to_json(orient='records')
     return Response(json)
-    #serialier = PriceSerializer(a, many=True)
-    #return Response(serialier.data)
 
 @api_view(['GET'])
 def getOptPortfolio(request):
     try:
         rawInput = request.GET["codes"]
         codes = rawInput.split(',')
-        print("@@@@@@@@@")
-        print(request)
         all_data = DailyPrice.objects.filter(pk__in=codes)
         df = read_frame(all_data, fieldnames=['code', 'date', 'close'])
         
@@ -81,17 +72,6 @@ def getOptPortfolio(request):
     
     jsonData = result.to_json(orient='records')
     return Response(jsonData)
-
-# @api_view(['GET'])
-# def getBollingerByCode(request, pk):
-#     try:
-#         info = BollingerInfo.objects.filter(pk=pk)
-#         df = read_frame(info)
-#     except:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-    
-#     json = df.to_json(orient='records')
-#     return Response(json)
 
 @api_view(['GET'])
 def getBollingerByCode(request, pk):
