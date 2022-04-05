@@ -1,6 +1,6 @@
-from .models import CompanyInfo, DailyPrice, AllCompanies, BollingerInfo
+from .models import CompanyInfo, DailyPrice, AllCompanies, BollingerInfo, BollingerTrendSignal, BollingerReverseSignal
 from rest_framework import viewsets, status
-from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer
+from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer, BollingerTrendSignalSerializer, BollingerReverseSignalSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import logging, json, datetime
@@ -84,3 +84,24 @@ def getBollingerByCode(request, pk):
     #json = df.to_json(orient='records')
     return Response(serializer.data)
     #return Response(serialier.data)
+@api_view(['GET'])
+def getBollingerTrendSignal(request, pk):
+    try:
+        info = BollingerTrendSignal.objects.filter(pk=pk)
+        serializer = BollingerTrendSignalSerializer(info, many=True)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    #json = df.to_json(orient='records')
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getBollingerReverseSignal(request, pk):
+    try:
+        info = BollingerReverseSignal.objects.filter(pk=pk)
+        serializer = BollingerReverseSignalSerializer(info, many=True)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    #json = df.to_json(orient='records')
+    return Response(serializer.data)

@@ -11,6 +11,8 @@ urlpatterns = [
     path('companylist/', views.getAllCompanies),
     path('prices/<str:pk>/', views.getPricesByCode),
     path('company/<str:pk>/', views.getCompanyByCode),
+    path('optimalportfolio/', views.getOptPortfolio),
     path('bollinger/<str:pk>/', views.getBollingerByCode),
-    path('optimalportfolio/', views.getOptPortfolio)
+    path('bollinger_trend/<str:pk>/', views.getBollingerTrendSignal),
+    path('bollinger_reverse/<str:pk>/', views.getBollingerReverseSignal),
 ]

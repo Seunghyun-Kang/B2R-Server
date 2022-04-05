@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DailyPrice, CompanyInfo, AllCompanies, BollingerInfo
+from .models import DailyPrice, CompanyInfo, AllCompanies, BollingerInfo, BollingerReverseSignal, BollingerTrendSignal
 
 class AllCompanySerializer(serializers.ModelSerializer):
     class Meta: 
@@ -19,4 +19,14 @@ class PriceSerializer(serializers.ModelSerializer):
 class BollingerSerializer(serializers.ModelSerializer):
     class Meta:
         model = BollingerInfo
+        fields = ('__all__')
+
+class BollingerTrendSignalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BollingerTrendSignal
+        fields = ('__all__')
+
+class BollingerReverseSignalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BollingerReverseSignal
         fields = ('__all__')
