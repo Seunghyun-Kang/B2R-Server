@@ -35,7 +35,7 @@ class TripleScreenSerializer(serializers.ModelSerializer):
     class Meta:
         model = TripleScreenInfo
         fields = ('__all__')
-class TripleScreenignalSerializer(serializers.ModelSerializer):
+class TripleScreenSignalSerializer(serializers.ModelSerializer):
     class Meta:
         model = TripleScreenSignal
         fields = ('__all__')
