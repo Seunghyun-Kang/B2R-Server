@@ -65,3 +65,26 @@ class BollingerReverseSignal(models.Model):
     class Meta:
         managed = False
         db_table = 'signal_bollinger_reverse'
+
+class TripleScreenInfo(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    ema130 = models.FloatField(blank=True, null=True)
+    ema60 = models.FloatField(blank=True, null=True)
+    macd = models.FloatField(blank=True, null=True)
+    signal_ = models.FloatField(blank=True, null=True)
+    pb = models.FloatField(blank=True, null=True)
+    macdhist = models.FloatField(blank=True, null=True)
+    fast_k = models.FloatField(blank=True, null=True)
+    slow_d = models.FloatField(blank=True, null=True)
+    class Meta:
+        managed = False
+        db_table = 'tripplescreen_info'
+
+class TripleScreenSignal(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    type = models.CharField(max_length=20, blank=True, null=True)
+    class Meta:
+        managed = False
+        db_table = 'signal_tripplescreen'

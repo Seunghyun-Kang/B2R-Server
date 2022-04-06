@@ -1,6 +1,6 @@
-from .models import CompanyInfo, DailyPrice, AllCompanies, BollingerInfo, BollingerTrendSignal, BollingerReverseSignal
+from .models import CompanyInfo, DailyPrice, AllCompanies, BollingerInfo, BollingerTrendSignal, BollingerReverseSignal, TripleScreenInfo, TripleScreenSignal
 from rest_framework import viewsets, status
-from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer, BollingerTrendSignalSerializer, BollingerReverseSignalSerializer
+from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer, BollingerTrendSignalSerializer, BollingerReverseSignalSerializer, TripleScreenSignalSerializer, TripleScreenSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import logging, json, datetime
@@ -81,9 +81,8 @@ def getBollingerByCode(request, pk):
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    #json = df.to_json(orient='records')
     return Response(serializer.data)
-    #return Response(serialier.data)
+    
 @api_view(['GET'])
 def getBollingerTrendSignal(request, pk):
     try:
@@ -92,7 +91,6 @@ def getBollingerTrendSignal(request, pk):
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    #json = df.to_json(orient='records')
     return Response(serializer.data)
 
 @api_view(['GET'])
@@ -103,5 +101,25 @@ def getBollingerReverseSignal(request, pk):
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    #json = df.to_json(orient='records')
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def getTripleScerenByCode(request, pk):
+    try:
+        info = TripleScreenInfo.objects.filter(pk=pk)
+        serializer = TripleScreenSerializer(info, many=True)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getTripleScerenSignal(request, pk):
+    try:
+        info = TripleScreenSignal.objects.filter(pk=pk)
+        serializer = TripleScreenSignalSerializer(info, many=True)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
     return Response(serializer.data)
