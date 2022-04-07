@@ -8,6 +8,7 @@ from django_pandas.io import read_frame
 from .modules import PortfolioOptimization as po
 import pandas as pd
 from functools import reduce
+from.modules import GetRealTimePrices as gr
 
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = CompanyInfo.objects.all()
@@ -123,3 +124,17 @@ def getTripleScerenSignal(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getRealTimePrice(request, pk):
+    try:
+        price , time = gr.RealTimePrice().get_price(pk)
+        data = {
+        "code": pk,
+        "time": time,
+        "price": price
+    }
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    return Response(data)
