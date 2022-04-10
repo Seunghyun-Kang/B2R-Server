@@ -54,6 +54,7 @@ class BollingerTrendSignal(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
     date = models.DateField()
     type = models.CharField(max_length=20, blank=True, null=True)
+    close = models.BigIntegerField(blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'signal_bollinger_trend'
@@ -62,6 +63,7 @@ class BollingerReverseSignal(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
     date = models.DateField()
     type = models.CharField(max_length=20, blank=True, null=True)
+    close = models.BigIntegerField(blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'signal_bollinger_reverse'
@@ -84,6 +86,7 @@ class TripleScreenSignal(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
     date = models.DateField()
     type = models.CharField(max_length=20, blank=True, null=True)
+    close = models.BigIntegerField(blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'signal_tripplescreen'
