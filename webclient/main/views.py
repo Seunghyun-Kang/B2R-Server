@@ -3,12 +3,13 @@ from rest_framework import viewsets, status
 from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer, BollingerTrendSignalSerializer, BollingerReverseSignalSerializer, TripleScreenSignalSerializer, TripleScreenSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-import logging, json, datetime
+import logging, json
 from django_pandas.io import read_frame
 from .modules import PortfolioOptimization as po
 import pandas as pd
 from functools import reduce
 from.modules import GetRealTimePrices as gr
+from datetime import datetime, timedelta
 
 class CompanyViewSet(viewsets.ModelViewSet):
     queryset = CompanyInfo.objects.all()
@@ -138,3 +139,41 @@ def getRealTimePrice(request, pk):
         return Response(status=status.HTTP_404_NOT_FOUND)
     
     return Response(data)
+
+@api_view(['GET'])
+def getLatestTripleScerenSignal(request):
+    today = datetime.today().strftime("%Y-%m-%d")
+    daybefore3 = (datetime.today() - timedelta(3)).strftime("%Y-%m-%d")
+    try:
+        info = TripleScreenSignal.objects.filter(date__range=[daybefore3, today])
+        serializer = TripleScreenSignalSerializer(info, many=True)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getLatestBollingerTrendSignal(request):
+    today = datetime.today().strftime("%Y-%m-%d")
+    daybefore3 = (datetime.today() - timedelta(3)).strftime("%Y-%m-%d")
+    
+    try:
+        info = BollingerTrendSignal.objects.filter(date__range=[daybefore3, today])
+        serializer = BollingerTrendSignalSerializer(info, many=True)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getLatestBollingerReverseSignal(request):
+    today = datetime.today().strftime("%Y-%m-%d")
+    daybefore3 = (datetime.today() - timedelta(3)).strftime("%Y-%m-%d")
+    
+    try:
+        info = BollingerReverseSignal.objects.filter(date__range=[daybefore3, today])
+        serializer = BollingerReverseSignalSerializer(info, many=True)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    return Response(serializer.data)

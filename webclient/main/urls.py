@@ -18,4 +18,8 @@ urlpatterns = [
     path('triplescreen/<str:pk>/', views.getTripleScerenByCode),
     path('triplescreen_signal/<str:pk>/', views.getTripleScerenSignal),
     path('realtime_price/<str:pk>/', views.getRealTimePrice),
+    path('latest_signal_trend/', views.getLatestBollingerTrendSignal),
+    path('latest_signal_reverse/', views.getLatestBollingerReverseSignal),
+    path('latest_signal_triple', views.getLatestTripleScerenSignal),
+    
 ]
