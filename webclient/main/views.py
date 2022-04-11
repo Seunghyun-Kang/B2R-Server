@@ -171,7 +171,7 @@ def getLatestBollingerReverseSignal(request):
     daybefore3 = (datetime.today() - timedelta(3)).strftime("%Y-%m-%d")
     
     try:
-        info = BollingerReverseSignal.objects.filter(date__range=[daybefore3, today])
+        info = BollingerReverseSignal.objects.filter(date__range=[daybefore3, today], 'valid' == 'valid')
         serializer = BollingerReverseSignalSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
