@@ -145,7 +145,7 @@ def getLatestTripleScerenSignal(request):
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(3)).strftime("%Y-%m-%d")
     try:
-        info = TripleScreenSignal.objects.filter(date__range=[daybefore3, today])
+        info = TripleScreenSignal.objects.filter(date__range=[daybefore3, today], valid='valid')
         serializer = TripleScreenSignalSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -158,7 +158,7 @@ def getLatestBollingerTrendSignal(request):
     daybefore3 = (datetime.today() - timedelta(3)).strftime("%Y-%m-%d")
     
     try:
-        info = BollingerTrendSignal.objects.filter(date__range=[daybefore3, today])
+        info = BollingerTrendSignal.objects.filter(date__range=[daybefore3, today], valid='valid')
         serializer = BollingerTrendSignalSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
