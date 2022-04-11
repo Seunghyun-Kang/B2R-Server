@@ -20,6 +20,6 @@ urlpatterns = [
     path('realtime_price/<str:pk>/', views.getRealTimePrice),
     path('latest_signal_trend/', views.getLatestBollingerTrendSignal),
     path('latest_signal_reverse/', views.getLatestBollingerReverseSignal),
-    path('latest_signal_triple', views.getLatestTripleScerenSignal),
+    path('latest_signal_triple/', views.getLatestTripleScerenSignal),
     
 ]
