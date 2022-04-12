@@ -56,6 +56,10 @@ class BollingerTrendSignal(models.Model):
     type = models.CharField(max_length=20, blank=True, null=True)
     close = models.BigIntegerField(blank=True, null=True)
     valid = models.CharField(blank=True, null=True,  max_length=10)
+    last_buy_close = models.BigIntegerField(blank=True, null=True)
+    last_buy_date = models.DateField()
+    last_sell_close = models.BigIntegerField(blank=True, null=True)
+    last_sell_date = models.DateField()
     
     class Meta:
         managed = False
@@ -67,6 +71,10 @@ class BollingerReverseSignal(models.Model):
     type = models.CharField(max_length=20, blank=True, null=True)
     close = models.BigIntegerField(blank=True, null=True)
     valid = models.CharField(blank=True, null=True, max_length=10)
+    last_buy_close = models.BigIntegerField(blank=True, null=True)
+    last_buy_date = models.DateField()
+    last_sell_close = models.BigIntegerField(blank=True, null=True)
+    last_sell_date = models.DateField()
     
     class Meta:
         managed = False
@@ -92,6 +100,11 @@ class TripleScreenSignal(models.Model):
     type = models.CharField(max_length=20, blank=True, null=True)
     close = models.BigIntegerField(blank=True, null=True)
     valid = models.CharField(blank=True, null=True, max_length=10)
+    last_buy_close = models.BigIntegerField(blank=True, null=True)
+    last_buy_date = models.DateField()
+    last_sell_close = models.BigIntegerField(blank=True, null=True)
+    last_sell_date = models.DateField()
+    
     class Meta:
         managed = False
         db_table = 'signal_tripplescreen'
