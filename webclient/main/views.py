@@ -141,7 +141,7 @@ def getRealTimePrice(request, pk):
     return Response(data)
 
 @api_view(['GET'])
-def getLatestTripleScerenSignal(request):
+def getLast3TripleScerenSignal(request):
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(3)).strftime("%Y-%m-%d")
     try:
@@ -153,7 +153,7 @@ def getLatestTripleScerenSignal(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getLatestBollingerTrendSignal(request):
+def getLast3BollingerTrendSignal(request):
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(3)).strftime("%Y-%m-%d")
     
@@ -166,9 +166,47 @@ def getLatestBollingerTrendSignal(request):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getLatestBollingerReverseSignal(request):
+def getLast3BollingerReverseSignal(request):
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(3)).strftime("%Y-%m-%d")
+    
+    try:
+        info = BollingerReverseSignal.objects.filter(date__range=[daybefore3, today], valid = 'valid')
+        serializer = BollingerReverseSignalSerializer(info, many=True)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getLatestTripleScerenSignal(request):
+    today = datetime.today().strftime("%Y-%m-%d")
+    daybefore3 = (datetime.today() - timedelta(1)).strftime("%Y-%m-%d")
+    try:
+        info = TripleScreenSignal.objects.filter(date__range=[daybefore3, today], valid='valid')
+        serializer = TripleScreenSignalSerializer(info, many=True)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getLatestBollingerTrendSignal(request):
+    today = datetime.today().strftime("%Y-%m-%d")
+    daybefore3 = (datetime.today() - timedelta(1)).strftime("%Y-%m-%d")
+    
+    try:
+        info = BollingerTrendSignal.objects.filter(date__range=[daybefore3, today], valid='valid')
+        serializer = BollingerTrendSignalSerializer(info, many=True)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getLatestBollingerReverseSignal(request):
+    today = datetime.today().strftime("%Y-%m-%d")
+    daybefore3 = (datetime.today() - timedelta(1)).strftime("%Y-%m-%d")
     
     try:
         info = BollingerReverseSignal.objects.filter(date__range=[daybefore3, today], valid = 'valid')
