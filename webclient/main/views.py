@@ -142,6 +142,8 @@ def getRealTimePrice(request, pk):
 
 @api_view(['GET'])
 def getLastTripleScerenSignal(request, lastday):
+    print("!!!!!!!!!!!!!!!!")
+    print(lastday)
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
     try:
@@ -154,6 +156,8 @@ def getLastTripleScerenSignal(request, lastday):
 
 @api_view(['GET'])
 def getLastBollingerTrendSignal(request, lastday):
+    print("!!!!!!!!!!!!!!!!")
+    print(lastday)
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
     
@@ -167,6 +171,8 @@ def getLastBollingerTrendSignal(request, lastday):
 
 @api_view(['GET'])
 def getLastBollingerReverseSignal(request, lastday):
+    print("!!!!!!!!!!!!!!!!")
+    print(lastday)
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
     
