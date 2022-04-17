@@ -1,4 +1,4 @@
-from .models import CompanyInfo, CompanyInfoNASDAQ, DailyPrice, AllCompanies, BollingerInfo, BollingerTrendSignal, BollingerReverseSignal, TripleScreenInfo, TripleScreenSignal
+from .models import CompanyInfo, CompanyInfoNASDAQ, DailyPrice, DailyPriceUSA, AllCompanies, BollingerInfo, BollingerTrendSignal, BollingerReverseSignal, TripleScreenInfo, TripleScreenSignal
 from rest_framework import viewsets, status
 from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer, BollingerTrendSignalSerializer, BollingerReverseSignalSerializer, TripleScreenSignalSerializer, TripleScreenSerializer
 from rest_framework.decorators import api_view
@@ -46,9 +46,12 @@ def getAllCompanies(request, symbol):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getPricesByCode(request, pk):
+def getPricesByCode(request,symbol ,pk):
     try:
-        prices = DailyPrice.objects.filter(pk=pk)
+        if symbol == "KRX":
+            prices = DailyPrice.objects.filter(pk=pk)
+        elif symbol == "NASDAQ":
+            prices = DailyPriceUSA.objects.filter(pk=pk)
         df = read_frame(prices)
         df.dropna(subset=['close'])
     except:

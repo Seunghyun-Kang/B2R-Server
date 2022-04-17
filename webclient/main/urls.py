@@ -9,7 +9,7 @@ router = routers.DefaultRouter()
 urlpatterns = [
     path('', include(router.urls)),
     path('companylist/<str:symbol>/', views.getAllCompanies),
-    path('prices/<str:pk>/', views.getPricesByCode),
+    path('prices/<str:symbol>/<str:pk>/', views.getPricesByCode),
     path('company/<str:pk>/', views.getCompanyByCode),
     path('optimalportfolio/', views.getOptPortfolio),
     path('bollinger/<str:pk>/', views.getBollingerByCode),
