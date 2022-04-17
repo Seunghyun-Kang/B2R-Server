@@ -8,7 +8,7 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('companylist/', views.getAllCompanies),
+    path('companylist/<str:symbol>/', views.getAllCompanies),
     path('prices/<str:pk>/', views.getPricesByCode),
     path('company/<str:pk>/', views.getCompanyByCode),
     path('optimalportfolio/', views.getOptPortfolio),

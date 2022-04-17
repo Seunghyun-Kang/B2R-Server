@@ -1,4 +1,4 @@
-from .models import CompanyInfo, DailyPrice, AllCompanies, BollingerInfo, BollingerTrendSignal, BollingerReverseSignal, TripleScreenInfo, TripleScreenSignal
+from .models import CompanyInfo, CompanyInfoNASDAQ, DailyPrice, AllCompanies, BollingerInfo, BollingerTrendSignal, BollingerReverseSignal, TripleScreenInfo, TripleScreenSignal
 from rest_framework import viewsets, status
 from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer, BollingerTrendSignalSerializer, BollingerReverseSignalSerializer, TripleScreenSignalSerializer, TripleScreenSerializer
 from rest_framework.decorators import api_view
@@ -32,10 +32,14 @@ def getCompanyByCode(request, pk):
     return Response(a)
 
 @api_view(['GET'])
-def getAllCompanies(request):
+def getAllCompanies(request, code):
     try:
-        companies = CompanyInfo.objects.all()
-        serializer = CompanySerializer(companies, many=True)
+        if(code == "KRX"):
+            companies = CompanyInfo.objects.all()
+            serializer = CompanySerializer(companies, many=True)
+        elif(code == "NASDAQ"):
+            companies = CompanyInfoNASDAQ.objects.all()
+            serializer = CompanySerializer(companies, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -142,8 +146,6 @@ def getRealTimePrice(request, pk):
 
 @api_view(['GET'])
 def getLastTripleScerenSignal(request, lastday):
-    print("!!!!!!!!!!!!!!!!")
-    print(lastday)
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
     try:
@@ -156,8 +158,6 @@ def getLastTripleScerenSignal(request, lastday):
 
 @api_view(['GET'])
 def getLastBollingerTrendSignal(request, lastday):
-    print("!!!!!!!!!!!!!!!!")
-    print(lastday)
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
     
@@ -171,8 +171,6 @@ def getLastBollingerTrendSignal(request, lastday):
 
 @api_view(['GET'])
 def getLastBollingerReverseSignal(request, lastday):
-    print("!!!!!!!!!!!!!!!!")
-    print(lastday)
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
     

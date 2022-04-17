@@ -20,6 +20,16 @@ class CompanyInfo(models.Model):
         db_table = 'company_info'
         unique_together = (('code', 'company'),)
 
+class CompanyInfoNASDAQ(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    company = models.CharField(max_length=40, blank=True, null=True)
+    last_update = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'company_info_usa'
+        unique_together = (('code', 'company'),)
+
 
 class DailyPrice(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
