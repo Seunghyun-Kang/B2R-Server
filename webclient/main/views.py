@@ -32,12 +32,12 @@ def getCompanyByCode(request, pk):
     return Response(a)
 
 @api_view(['GET'])
-def getAllCompanies(request, code):
+def getAllCompanies(request, symbol):
     try:
-        if(code == "KRX"):
+        if(symbol == "KRX"):
             companies = CompanyInfo.objects.all()
             serializer = CompanySerializer(companies, many=True)
-        elif(code == "NASDAQ"):
+        elif(symbol == "NASDAQ"):
             companies = CompanyInfoNASDAQ.objects.all()
             serializer = CompanySerializer(companies, many=True)
     except:
