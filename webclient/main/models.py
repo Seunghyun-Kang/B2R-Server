@@ -74,6 +74,21 @@ class BollingerInfo(models.Model):
         managed = False
         db_table = 'bollinger_info'
 
+class BollingerInfoUSA(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    ma20 = models.FloatField(blank=True, null=True)
+    stddev = models.FloatField(blank=True, null=True)
+    upper = models.BigIntegerField(blank=True, null=True)
+    lower = models.BigIntegerField(blank=True, null=True)
+    pb = models.FloatField(blank=True, null=True)
+    bandwidth = models.FloatField(blank=True, null=True)
+    mfi10 = models.FloatField(blank=True, null=True)
+    iip21 = models.FloatField(blank=True, null=True)
+    class Meta:
+        managed = False
+        db_table = 'bollinger_info_usa'
+
 class BollingerTrendSignal(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
     date = models.DateField()
@@ -89,6 +104,21 @@ class BollingerTrendSignal(models.Model):
         managed = False
         db_table = 'signal_bollinger_trend'
 
+class BollingerTrendSignalUSA(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    type = models.CharField(max_length=20, blank=True, null=True)
+    close = models.BigIntegerField(blank=True, null=True)
+    valid = models.CharField(blank=True, null=True,  max_length=10)
+    last_buy_close = models.BigIntegerField(blank=True, null=True)
+    last_buy_date = models.DateField()
+    last_sell_close = models.BigIntegerField(blank=True, null=True)
+    last_sell_date = models.DateField()
+    
+    class Meta:
+        managed = False
+        db_table = 'signal_bollinger_trend_usa'
+        
 class BollingerReverseSignal(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
     date = models.DateField()
@@ -104,6 +134,21 @@ class BollingerReverseSignal(models.Model):
         managed = False
         db_table = 'signal_bollinger_reverse'
 
+class BollingerReverseSignalUSA(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    type = models.CharField(max_length=20, blank=True, null=True)
+    close = models.BigIntegerField(blank=True, null=True)
+    valid = models.CharField(blank=True, null=True, max_length=10)
+    last_buy_close = models.BigIntegerField(blank=True, null=True)
+    last_buy_date = models.DateField()
+    last_sell_close = models.BigIntegerField(blank=True, null=True)
+    last_sell_date = models.DateField()
+    
+    class Meta:
+        managed = False
+        db_table = 'signal_bollinger_reverse_usa'
+
 class TripleScreenInfo(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
     date = models.DateField()
@@ -117,6 +162,20 @@ class TripleScreenInfo(models.Model):
     class Meta:
         managed = False
         db_table = 'tripplescreen_info'
+
+class TripleScreenInfoUSA(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    ema130 = models.FloatField(blank=True, null=True)
+    ema60 = models.FloatField(blank=True, null=True)
+    macd = models.FloatField(blank=True, null=True)
+    _signal = models.FloatField(blank=True, null=True)
+    macdhist = models.FloatField(blank=True, null=True)
+    fast_k = models.FloatField(blank=True, null=True)
+    slow_d = models.FloatField(blank=True, null=True)
+    class Meta:
+        managed = False
+        db_table = 'tripplescreen_info_usa'
 
 class TripleScreenSignal(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
@@ -132,3 +191,18 @@ class TripleScreenSignal(models.Model):
     class Meta:
         managed = False
         db_table = 'signal_tripplescreen'
+
+class TripleScreenSignalUSA(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    type = models.CharField(max_length=20, blank=True, null=True)
+    close = models.BigIntegerField(blank=True, null=True)
+    valid = models.CharField(blank=True, null=True, max_length=10)
+    last_buy_close = models.BigIntegerField(blank=True, null=True)
+    last_buy_date = models.DateField()
+    last_sell_close = models.BigIntegerField(blank=True, null=True)
+    last_sell_date = models.DateField()
+    
+    class Meta:
+        managed = False
+        db_table = 'signal_tripplescreen_usa'

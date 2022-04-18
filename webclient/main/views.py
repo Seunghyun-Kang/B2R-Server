@@ -1,4 +1,6 @@
-from .models import CompanyInfo, CompanyInfoNASDAQ, DailyPrice, DailyPriceUSA, AllCompanies, BollingerInfo, BollingerTrendSignal, BollingerReverseSignal, TripleScreenInfo, TripleScreenSignal
+from .models import CompanyInfo, DailyPrice, AllCompanies, BollingerInfo, BollingerTrendSignal, BollingerReverseSignal, TripleScreenInfo, TripleScreenSignal
+from .models import CompanyInfoNASDAQ, DailyPriceUSA, BollingerInfoUSA, BollingerTrendSignalUSA, BollingerReverseSignalUSA, TripleScreenInfoUSA, TripleScreenSignalUSA
+
 from rest_framework import viewsets, status
 from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer, BollingerTrendSignalSerializer, BollingerReverseSignalSerializer, TripleScreenSignalSerializer, TripleScreenSerializer
 from rest_framework.decorators import api_view
@@ -83,9 +85,12 @@ def getOptPortfolio(request):
     return Response(jsonData)
 
 @api_view(['GET'])
-def getBollingerByCode(request, pk):
+def getBollingerByCode(request, symbol, pk):
     try:
-        info = BollingerInfo.objects.filter(pk=pk)
+        if symbol == "KRX":
+            info = BollingerInfo.objects.filter(pk=pk)
+        elif symbol == "NASDAQ":
+            info = BollingerInfoUSA.objects.filter(pk=pk)
         serializer = BollingerSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -93,19 +98,25 @@ def getBollingerByCode(request, pk):
     return Response(serializer.data)
     
 @api_view(['GET'])
-def getBollingerTrendSignal(request, pk):
+def getBollingerTrendSignal(request, symbol, pk):
     try:
-        info = BollingerTrendSignal.objects.filter(pk=pk)
-        serializer = BollingerTrendSignalSerializer(info, many=True)
+        if symbol == "KRX":
+            info = BollingerTrendSignal.objects.filter(pk=pk)
+        elif symbol == "NASDAQ":
+            info = BollingerTrendSignalUSA.objects.filter(pk=pk)
+        serializer = BollingerSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getBollingerReverseSignal(request, pk):
+def getBollingerReverseSignal(request, symbol, pk):
     try:
-        info = BollingerReverseSignal.objects.filter(pk=pk)
+        if symbol == "KRX":
+            info = BollingerReverseSignal.objects.filter(pk=pk)
+        elif symbol == "NASDAQ":
+            info = BollingerReverseSignalUSA.objects.filter(pk=pk)
         serializer = BollingerReverseSignalSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -114,9 +125,12 @@ def getBollingerReverseSignal(request, pk):
 
 
 @api_view(['GET'])
-def getTripleScerenByCode(request, pk):
+def getTripleScerenByCode(request, symbol, pk):
     try:
-        info = TripleScreenInfo.objects.filter(pk=pk)
+        if symbol == "KRX":
+            info = TripleScreenInfo.objects.filter(pk=pk)
+        elif symbol == "NASDAQ":
+            info = TripleScreenInfoUSA.objects.filter(pk=pk)
         serializer = TripleScreenSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -124,9 +138,12 @@ def getTripleScerenByCode(request, pk):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getTripleScerenSignal(request, pk):
+def getTripleScerenSignal(request, symbol, pk):
     try:
-        info = TripleScreenSignal.objects.filter(pk=pk)
+        if symbol == "KRX":
+            info = TripleScreenSignal.objects.filter(pk=pk)
+        elif symbol == "NASDAQ":
+            info = TripleScreenSignalUSA.objects.filter(pk=pk)
         serializer = TripleScreenSignalSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -134,7 +151,7 @@ def getTripleScerenSignal(request, pk):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getRealTimePrice(request, pk):
+def getRealTimePrice(request, symbol, pk):
     try:
         price , time = gr.RealTimePrice().get_price(pk)
         data = {
@@ -148,11 +165,14 @@ def getRealTimePrice(request, pk):
     return Response(data)
 
 @api_view(['GET'])
-def getLastTripleScerenSignal(request, lastday):
+def getLastTripleScerenSignal(request, symbol, lastday):
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
     try:
-        info = TripleScreenSignal.objects.filter(date__range=[daybefore3, today], valid='valid')
+        if symbol == "KRX":
+            info = TripleScreenSignal.objects.filter(date__range=[daybefore3, today], valid='valid')
+        elif symbol == "NASDAQ":
+            info = TripleScreenSignalUSA.objects.filter(date__range=[daybefore3, today], valid='valid')
         serializer = TripleScreenSignalSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -160,12 +180,15 @@ def getLastTripleScerenSignal(request, lastday):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getLastBollingerTrendSignal(request, lastday):
+def getLastBollingerTrendSignal(request, symbol, lastday):
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
     
     try:
-        info = BollingerTrendSignal.objects.filter(date__range=[daybefore3, today], valid='valid')
+        if symbol == "KRX":
+            info = BollingerTrendSignal.objects.filter(date__range=[daybefore3, today], valid='valid')
+        elif symbol == "NASDAQ":
+            info = BollingerTrendSignalUSA.objects.filter(date__range=[daybefore3, today], valid='valid')
         serializer = BollingerTrendSignalSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -173,12 +196,15 @@ def getLastBollingerTrendSignal(request, lastday):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getLastBollingerReverseSignal(request, lastday):
+def getLastBollingerReverseSignal(request, symbol, lastday):
     today = datetime.today().strftime("%Y-%m-%d")
     daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
     
     try:
-        info = BollingerReverseSignal.objects.filter(date__range=[daybefore3, today], valid = 'valid')
+        if symbol == "KRX":
+            info = BollingerReverseSignal.objects.filter(date__range=[daybefore3, today], valid = 'valid')
+        elif symbol == "NASDAQ":
+            info = BollingerReverseSignalUSA.objects.filter(date__range=[daybefore3, today], valid = 'valid')
         serializer = BollingerReverseSignalSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
