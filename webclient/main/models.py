@@ -48,12 +48,12 @@ class DailyPrice(models.Model):
 class DailyPriceUSA(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
     date = models.DateField()
-    open = models.BigIntegerField(blank=True, null=True)
-    high = models.BigIntegerField(blank=True, null=True)
-    low = models.BigIntegerField(blank=True, null=True)
-    close = models.BigIntegerField(blank=True, null=True)
-    diff = models.BigIntegerField(blank=True, null=True)
-    volume = models.BigIntegerField(blank=True, null=True)
+    open = models.FloatField(blank=True, null=True)
+    high = models.FloatField(blank=True, null=True)
+    low = models.FloatField(blank=True, null=True)
+    close = models.FloatField(blank=True, null=True)
+    diff = models.FloatField(blank=True, null=True)
+    volume = models.FloatField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -79,8 +79,8 @@ class BollingerInfoUSA(models.Model):
     date = models.DateField()
     ma20 = models.FloatField(blank=True, null=True)
     stddev = models.FloatField(blank=True, null=True)
-    upper = models.BigIntegerField(blank=True, null=True)
-    lower = models.BigIntegerField(blank=True, null=True)
+    upper = models.FloatField(blank=True, null=True)
+    lower = models.FloatField(blank=True, null=True)
     pb = models.FloatField(blank=True, null=True)
     bandwidth = models.FloatField(blank=True, null=True)
     mfi10 = models.FloatField(blank=True, null=True)
@@ -108,11 +108,11 @@ class BollingerTrendSignalUSA(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
     date = models.DateField()
     type = models.CharField(max_length=20, blank=True, null=True)
-    close = models.BigIntegerField(blank=True, null=True)
+    close = models.FloatField(blank=True, null=True)
     valid = models.CharField(blank=True, null=True,  max_length=10)
-    last_buy_close = models.BigIntegerField(blank=True, null=True)
+    last_buy_close = models.FloatField(blank=True, null=True)
     last_buy_date = models.DateField()
-    last_sell_close = models.BigIntegerField(blank=True, null=True)
+    last_sell_close = models.FloatField(blank=True, null=True)
     last_sell_date = models.DateField()
     
     class Meta:
@@ -138,11 +138,11 @@ class BollingerReverseSignalUSA(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
     date = models.DateField()
     type = models.CharField(max_length=20, blank=True, null=True)
-    close = models.BigIntegerField(blank=True, null=True)
+    close = models.FloatField(blank=True, null=True)
     valid = models.CharField(blank=True, null=True, max_length=10)
-    last_buy_close = models.BigIntegerField(blank=True, null=True)
+    last_buy_close = models.FloatField(blank=True, null=True)
     last_buy_date = models.DateField()
-    last_sell_close = models.BigIntegerField(blank=True, null=True)
+    last_sell_close = models.FloatField(blank=True, null=True)
     last_sell_date = models.DateField()
     
     class Meta:
@@ -196,11 +196,11 @@ class TripleScreenSignalUSA(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
     date = models.DateField()
     type = models.CharField(max_length=20, blank=True, null=True)
-    close = models.BigIntegerField(blank=True, null=True)
+    close = models.FloatField(blank=True, null=True)
     valid = models.CharField(blank=True, null=True, max_length=10)
-    last_buy_close = models.BigIntegerField(blank=True, null=True)
+    last_buy_close = models.FloatField(blank=True, null=True)
     last_buy_date = models.DateField()
-    last_sell_close = models.BigIntegerField(blank=True, null=True)
+    last_sell_close = models.FloatField(blank=True, null=True)
     last_sell_date = models.DateField()
     
     class Meta:
