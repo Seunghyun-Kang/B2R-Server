@@ -104,7 +104,7 @@ def getBollingerTrendSignal(request, symbol, pk):
             info = BollingerTrendSignal.objects.filter(pk=pk)
         elif symbol == "NASDAQ":
             info = BollingerTrendSignalUSA.objects.filter(pk=pk)
-        serializer = BollingerSerializer(info, many=True)
+        serializer = BollingerTrendSignalSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
