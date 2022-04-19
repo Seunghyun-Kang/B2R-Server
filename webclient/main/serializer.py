@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DailyPrice, CompanyInfo, AllCompanies, BollingerInfo, BollingerReverseSignal, BollingerTrendSignal, TripleScreenInfo, TripleScreenSignal
+from .models import DailyPrice, CompanyInfo, AllCompanies, BollingerInfo, BollingerInfoUSA,  BollingerReverseSignal, BollingerReverseSignalUSA, BollingerTrendSignal, BollingerTrendSignalUSA,TripleScreenInfo,TripleScreenInfoUSA,  TripleScreenSignal, TripleScreenSignalUSA
 
 class AllCompanySerializer(serializers.ModelSerializer):
     class Meta: 
@@ -20,23 +20,44 @@ class BollingerSerializer(serializers.ModelSerializer):
     class Meta:
         model = BollingerInfo
         fields = ('__all__')
+class BollingerSerializerUSA(serializers.ModelSerializer):
+    class Meta:
+        model = BollingerInfoUSA
+        fields = ('__all__')
 
 class BollingerTrendSignalSerializer(serializers.ModelSerializer):
     class Meta:
         model = BollingerTrendSignal
+        fields = ('__all__')
+class BollingerTrendSignalSerializerUSA(serializers.ModelSerializer):
+    class Meta:
+        model = BollingerTrendSignalSerializerUSA
         fields = ('__all__')
 
 class BollingerReverseSignalSerializer(serializers.ModelSerializer):
     class Meta:
         model = BollingerReverseSignal
         fields = ('__all__')
+class BollingerReverseSignalSerializerUSA(serializers.ModelSerializer):
+    class Meta:
+        model = BollingerReverseSignalUSA
+        fields = ('__all__')
 
 class TripleScreenSerializer(serializers.ModelSerializer):
     class Meta:
         model = TripleScreenInfo
+        fields = ('__all__')
+
+class TripleScreenSerializerUSA(serializers.ModelSerializer):
+    class Meta:
+        model = TripleScreenInfoUSA
         fields = ('__all__')
 class TripleScreenSignalSerializer(serializers.ModelSerializer):
     class Meta:
         model = TripleScreenSignal
         fields = ('__all__')
 
+class TripleScreenSignalSerializerUSA(serializers.ModelSerializer):
+    class Meta:
+        model = TripleScreenSignalUSA
+        fields = ('__all__')
