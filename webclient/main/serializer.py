@@ -31,7 +31,7 @@ class BollingerTrendSignalSerializer(serializers.ModelSerializer):
         fields = ('__all__')
 class BollingerTrendSignalSerializerUSA(serializers.ModelSerializer):
     class Meta:
-        model = BollingerTrendSignalSerializerUSA
+        model = BollingerTrendSignalUSA
         fields = ('__all__')
 
 class BollingerReverseSignalSerializer(serializers.ModelSerializer):
