@@ -59,7 +59,7 @@ def getPricesByCode(request,symbol ,pk):
             prices = DailyPrice.objects.filter(pk=pk)
         elif symbol == "NASDAQ":
             prices = DailyPriceUSA.objects.filter(pk=pk)
-        elif symbol == "NASDAQ":
+        elif symbol == "COIN":
             prices = DailyPriceCOIN.objects.filter(pk=pk)
         df = read_frame(prices)
         df.dropna(subset=['close'])
