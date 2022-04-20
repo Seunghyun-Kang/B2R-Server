@@ -101,7 +101,7 @@ def getBollingerByCode(request, symbol, pk):
             info = BollingerInfoUSA.objects.filter(pk=pk)
             serializer = BollingerSerializerUSA(info, many=True)
         elif symbol == "COIN":
-            info = BollingerInfoUSA.objects.filter(pk=pk)
+            info = BollingerInfoCOIN.objects.filter(pk=pk)
             serializer = BollingerSerializerUSA(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
