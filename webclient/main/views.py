@@ -74,7 +74,12 @@ def getOptPortfolio(request):
     try:
         rawInput = request.GET["codes"]
         codes = rawInput.split(',')
-        all_data = DailyPrice.objects.filter(pk__in=codes)
+        if symbol == "KRX":
+            all_data = DailyPrice.objects.filter(pk__in=codes)
+        elif symbol == "NASDAQ":
+            all_data = DailyPriceUSA.objects.filter(pk__in=codes)
+        elif symbol == "COIN":
+            all_data = DailyPriceCOIN.objects.filter(pk__in=codes)
         df = read_frame(all_data, fieldnames=['code', 'date', 'close'])
         
         d=[]

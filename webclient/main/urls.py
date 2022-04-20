@@ -12,7 +12,7 @@ urlpatterns = [
     path('prices/<str:symbol>/<str:pk>/', views.getPricesByCode),
     path('company/<str:pk>/', views.getCompanyByCode),
     
-    path('optimalportfolio/', views.getOptPortfolio),
+    path('optimalportfolio/<str:symbol>/', views.getOptPortfolio),
     
     path('bollinger/<str:symbol>/<str:pk>/', views.getBollingerByCode),
     path('bollinger_trend/<str:symbol>/<str:pk>/', views.getBollingerTrendSignal),
