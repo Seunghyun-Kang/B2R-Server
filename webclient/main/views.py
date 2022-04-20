@@ -70,7 +70,7 @@ def getPricesByCode(request,symbol ,pk):
     return Response(json)
 
 @api_view(['GET'])
-def getOptPortfolio(request):
+def getOptPortfolio(request, symbol):
     try:
         rawInput = request.GET["codes"]
         codes = rawInput.split(',')
