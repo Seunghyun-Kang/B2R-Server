@@ -1,5 +1,6 @@
 from .models import CompanyInfo, DailyPrice, AllCompanies, BollingerInfo, BollingerTrendSignal, BollingerReverseSignal, TripleScreenInfo, TripleScreenSignal
 from .models import CompanyInfoNASDAQ, DailyPriceUSA, BollingerInfoUSA, BollingerTrendSignalUSA, BollingerReverseSignalUSA, TripleScreenInfoUSA, TripleScreenSignalUSA
+from .models import CompanyInfoCOIN, DailyPriceCOIN, BollingerInfoCOIN, BollingerTrendSignalCOIN, BollingerReverseSignalCOIN, TripleScreenInfoCOIN, TripleScreenSignalCOIN
 
 from rest_framework import viewsets, status
 from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer, BollingerTrendSignalSerializer, BollingerReverseSignalSerializer, TripleScreenSignalSerializer, TripleScreenSerializer
@@ -43,6 +44,9 @@ def getAllCompanies(request, symbol):
         elif(symbol == "NASDAQ"):
             companies = CompanyInfoNASDAQ.objects.all()
             serializer = CompanySerializer(companies, many=True)
+        elif(symbol == "COIN"):
+            companies = CompanyInfoCOIN.objects.all()
+            serializer = CompanySerializer(companies, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -55,6 +59,8 @@ def getPricesByCode(request,symbol ,pk):
             prices = DailyPrice.objects.filter(pk=pk)
         elif symbol == "NASDAQ":
             prices = DailyPriceUSA.objects.filter(pk=pk)
+        elif symbol == "NASDAQ":
+            prices = DailyPriceCOIN.objects.filter(pk=pk)
         df = read_frame(prices)
         df.dropna(subset=['close'])
     except:
@@ -94,6 +100,9 @@ def getBollingerByCode(request, symbol, pk):
         elif symbol == "NASDAQ":
             info = BollingerInfoUSA.objects.filter(pk=pk)
             serializer = BollingerSerializerUSA(info, many=True)
+        elif symbol == "COIN":
+            info = BollingerInfoUSA.objects.filter(pk=pk)
+            serializer = BollingerSerializerUSA(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -107,6 +116,9 @@ def getBollingerTrendSignal(request, symbol, pk):
             serializer = BollingerTrendSignalSerializer(info, many=True)
         elif symbol == "NASDAQ":
             info = BollingerTrendSignalUSA.objects.filter(pk=pk)
+            serializer = BollingerTrendSignalSerializerUSA(info, many=True)
+        elif symbol == "COIN":
+            info = BollingerTrendSignalCOIN.objects.filter(pk=pk)
             serializer = BollingerTrendSignalSerializerUSA(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -122,6 +134,10 @@ def getBollingerReverseSignal(request, symbol, pk):
         elif symbol == "NASDAQ":
             info = BollingerReverseSignalUSA.objects.filter(pk=pk)
             serializer = BollingerReverseSignalSerializerUSA(info, many=True)
+        elif symbol == "COIN":
+            info = BollingerReverseSignalCOIN.objects.filter(pk=pk)
+            serializer = BollingerReverseSignalSerializerUSA(info, many=True)
+    
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -137,6 +153,9 @@ def getTripleScerenByCode(request, symbol, pk):
         elif symbol == "NASDAQ":
             info = TripleScreenInfoUSA.objects.filter(pk=pk)
             serializer = TripleScreenSerializerUSA(info, many=True)
+        elif symbol == "COIN":
+            info = TripleScreenInfoCOIN.objects.filter(pk=pk)
+            serializer = TripleScreenSerializerUSA(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -150,6 +169,9 @@ def getTripleScerenSignal(request, symbol, pk):
             serializer = TripleScreenSignalSerializer(info, many=True)
         elif symbol == "NASDAQ":
             info = TripleScreenSignalUSA.objects.filter(pk=pk)
+            serializer = TripleScreenSignalSerializerUSA(info, many=True)
+        elif symbol == "COIN":
+            info = TripleScreenSignalCOIN.objects.filter(pk=pk)
             serializer = TripleScreenSignalSerializerUSA(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
@@ -181,6 +203,10 @@ def getLastTripleScerenSignal(request, symbol, lastday):
         elif symbol == "NASDAQ":
             info = TripleScreenSignalUSA.objects.filter(date__range=[daybefore3, today], valid='valid')
             serializer = TripleScreenSignalSerializerUSA(info, many=True)
+        elif symbol == "COIN":
+            info = TripleScreenSignalCOIN.objects.filter(date__range=[daybefore3, today], valid='valid')
+            serializer = TripleScreenSignalSerializerUSA(info, many=True)
+    
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -198,6 +224,10 @@ def getLastBollingerTrendSignal(request, symbol, lastday):
         elif symbol == "NASDAQ":
             info = BollingerTrendSignalUSA.objects.filter(date__range=[daybefore3, today], valid='valid')
             serializer = BollingerTrendSignalSerializerUSA(info, many=True)
+        elif symbol == "COIN":
+            info = BollingerTrendSignalCOIN.objects.filter(date__range=[daybefore3, today], valid='valid')
+            serializer = BollingerTrendSignalSerializerUSA(info, many=True)
+    
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -215,6 +245,10 @@ def getLastBollingerReverseSignal(request, symbol, lastday):
         elif symbol == "NASDAQ":
             info = BollingerReverseSignalUSA.objects.filter(date__range=[daybefore3, today], valid = 'valid')
             serializer = BollingerReverseSignalSerializerUSA(info, many=True)
+        elif symbol == "COIN":
+            info = BollingerReverseSignalCOIN.objects.filter(date__range=[daybefore3, today], valid = 'valid')
+            serializer = BollingerReverseSignalSerializerUSA(info, many=True)
+    
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
