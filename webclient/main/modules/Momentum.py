@@ -31,7 +31,7 @@ class DualMomentum:
     def __del__(self):
         self.conn.close()
 
-    def get_rltv_momentum(self, start_date, end_date):
+    def get_rltv_momentum(self, start_date, end_date, stockCount):
          with self.conn.cursor() as curs:
             sql = f"select max(date) from {self.priceTable} where date <= '{start_date}'"
             curs.execute(sql)
@@ -75,8 +75,8 @@ class DualMomentum:
             df = pd.DataFrame(rows, columns=columns)
             df = df[['code', 'old_price', 'new_price', 'returns']]
             df = df.sort_values(by='returns', ascending=False)
-            df = df.head(len(self.codes))
-            # df.index = pd.Index(range(len(self.codes)))
+            df = df.head(stockCount)
+            df.index = pd.Index(range(stockCount))
 
             print(df)
             print(f"\n Relative momentum ({start_date} ~ {end_date}) : {df['returns'].mean():.2f}% \n")
