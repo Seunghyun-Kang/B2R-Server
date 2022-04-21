@@ -10,6 +10,7 @@ from rest_framework.response import Response
 import logging, json
 from django_pandas.io import read_frame
 from .modules import PortfolioOptimization as po
+from .modules import Momentum as m
 import pandas as pd
 from functools import reduce
 from.modules import GetRealTimePrices as gr
@@ -258,3 +259,16 @@ def getLastBollingerReverseSignal(request, symbol, lastday):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     return Response(serializer.data)
+
+@api_view(['GET'])
+def getMomentum(request, symbol, lastday, stockCount):
+    try:
+        today = datetime.today().strftime("%Y-%m-%d")
+        past = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
+        momentum = m.DualMomentum(symbol)
+        result = momentum.get_rltv_momentum(past, today, stockCount)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    jsonData = result.to_json(orient='records')
+    return Response(jsonData)
