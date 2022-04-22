@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DailyPrice, CompanyInfo, AllCompanies, BollingerInfo, BollingerInfoUSA,  BollingerReverseSignal, BollingerReverseSignalUSA, BollingerTrendSignal, BollingerTrendSignalUSA,TripleScreenInfo,TripleScreenInfoUSA,  TripleScreenSignal, TripleScreenSignalUSA
+from .models import DailyPrice, CompanyInfo, AllCompanies, BollingerInfo, BollingerInfoUSA,  BollingerReverseSignal, BollingerReverseSignalUSA, BollingerTrendSignal, BollingerTrendSignalUSA,TripleScreenInfo,TripleScreenInfoUSA,  TripleScreenSignal, TripleScreenSignalUSA, Momentum
 
 class AllCompanySerializer(serializers.ModelSerializer):
     class Meta: 
@@ -60,4 +60,9 @@ class TripleScreenSignalSerializer(serializers.ModelSerializer):
 class TripleScreenSignalSerializerUSA(serializers.ModelSerializer):
     class Meta:
         model = TripleScreenSignalUSA
+        fields = ('__all__')
+
+class MomentumSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Momentum
         fields = ('__all__')
