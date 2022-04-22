@@ -302,3 +302,14 @@ class TripleScreenSignalCOIN(models.Model):
     class Meta:
         managed = False
         db_table = 'signal_tripplescreen_coin'
+
+class Momentum(models.Model):
+    hashcode = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    company = models.CharField(max_length=100, blank=True, null=True)
+    rank = models.IntegerField(blank=True, null=True)
+    returns = models.FloatField(blank=True, null=True)
+    
+    class Meta:
+        managed = False
+        db_table = 'momentum'
