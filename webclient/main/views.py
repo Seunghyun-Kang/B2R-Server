@@ -267,7 +267,10 @@ def getLastBollingerReverseSignal(request, symbol, lastday):
 def getMomentum(request, symbol, duration):
     try:
         partial_hash = str(symbol) + '_' + str(30) + '_' + str(duration)
+        print("@@@@@@@@@@@@")
+        print(partial_hash)
         queryset = Momentum.objects.filter(hashcode__icontains=partial_hash)
+        print(len(queryset))
         serializer = MomentumSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
