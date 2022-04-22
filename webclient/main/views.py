@@ -1,10 +1,13 @@
 from .models import CompanyInfo, DailyPrice, AllCompanies, BollingerInfo, BollingerTrendSignal, BollingerReverseSignal, TripleScreenInfo, TripleScreenSignal
 from .models import CompanyInfoNASDAQ, DailyPriceUSA, BollingerInfoUSA, BollingerTrendSignalUSA, BollingerReverseSignalUSA, TripleScreenInfoUSA, TripleScreenSignalUSA
 from .models import CompanyInfoCOIN, DailyPriceCOIN, BollingerInfoCOIN, BollingerTrendSignalCOIN, BollingerReverseSignalCOIN, TripleScreenInfoCOIN, TripleScreenSignalCOIN
+from .models import Momentum
 
 from rest_framework import viewsets, status
 from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer, BollingerTrendSignalSerializer, BollingerReverseSignalSerializer, TripleScreenSignalSerializer, TripleScreenSerializer
 from .serializer import BollingerSerializerUSA, BollingerTrendSignalSerializerUSA, BollingerReverseSignalSerializerUSA, TripleScreenSignalSerializerUSA, TripleScreenSerializerUSA
+from .serializer import MomentumSerializer
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 import logging, json
@@ -261,14 +264,12 @@ def getLastBollingerReverseSignal(request, symbol, lastday):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getMomentum(request, symbol, lastday, stockCount):
+def getMomentum(request, symbol, duration):
     try:
-        today = datetime.today().strftime("%Y-%m-%d")
-        past = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
-        momentum = m.DualMomentum(symbol)
-        result = momentum.get_rltv_momentum(past, today, stockCount)
+        partial_hash = str(symbol) + '_' + str(30) + '_' + str(duration)
+        queryset = Momentum.objects.filter(hashcode__icontains=partial_hash)
+        serializer = MomentumSerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
-    jsonData = result.to_json(orient='records')
-    return Response(jsonData)
+    return Response(serializer.data)
