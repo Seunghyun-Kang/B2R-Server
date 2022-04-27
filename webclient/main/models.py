@@ -313,3 +313,15 @@ class Momentum(models.Model):
     class Meta:
         managed = False
         db_table = 'momentum'
+
+class TradeHistory(models.Model):
+    hashcode = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    code = models.CharField(max_length=100, blank=True, null=True)
+    type = models.CharField(max_length=20, blank=True, null=True)
+    num = models.IntegerField(blank=True, null=True)
+    price = models.FloatField(blank=True, null=True)
+    
+    class Meta:
+        managed = False
+        db_table = 'trade_history'
