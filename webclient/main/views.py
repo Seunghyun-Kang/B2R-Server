@@ -2,11 +2,13 @@ from .models import CompanyInfo, DailyPrice, AllCompanies, BollingerInfo, Bollin
 from .models import CompanyInfoNASDAQ, DailyPriceUSA, BollingerInfoUSA, BollingerTrendSignalUSA, BollingerReverseSignalUSA, TripleScreenInfoUSA, TripleScreenSignalUSA
 from .models import CompanyInfoCOIN, DailyPriceCOIN, BollingerInfoCOIN, BollingerTrendSignalCOIN, BollingerReverseSignalCOIN, TripleScreenInfoCOIN, TripleScreenSignalCOIN
 from .models import Momentum
+from .models import TradeHistory
 
 from rest_framework import viewsets, status
 from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer, BollingerTrendSignalSerializer, BollingerReverseSignalSerializer, TripleScreenSignalSerializer, TripleScreenSerializer
 from .serializer import BollingerSerializerUSA, BollingerTrendSignalSerializerUSA, BollingerReverseSignalSerializerUSA, TripleScreenSignalSerializerUSA, TripleScreenSerializerUSA
 from .serializer import MomentumSerializer
+from .serializer import TradeHistorySerializer
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -269,6 +271,19 @@ def getMomentum(request, symbol, duration):
         partial_hash = str(symbol) + '_' + str(30) + '_' + str(duration)
         info = Momentum.objects.filter(hashcode__icontains=partial_hash)
         serializer = MomentumSerializer(info, many=True)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getTradeHistory(request, id, duration):
+    today = datetime.today().strftime("%Y-%m-%d")
+    lastday = (datetime.today() - timedelta(duration)).strftime("%Y-%m-%d")
+    
+    try:
+        info = TradeHistory.objects.filter(date__range=[lastday, today], id=id)
+        serializer = TradeHistorySerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
