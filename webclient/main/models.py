@@ -136,6 +136,7 @@ class BollingerTrendSignal(models.Model):
     last_buy_date = models.DateField()
     last_sell_close = models.BigIntegerField(blank=True, null=True)
     last_sell_date = models.DateField()
+    _period = models.IntegerField(blank=True, null=True)
     
     class Meta:
         managed = False
@@ -181,6 +182,7 @@ class BollingerReverseSignal(models.Model):
     last_buy_date = models.DateField()
     last_sell_close = models.BigIntegerField(blank=True, null=True)
     last_sell_date = models.DateField()
+    _period = models.IntegerField(blank=True, null=True)
     
     class Meta:
         managed = False
