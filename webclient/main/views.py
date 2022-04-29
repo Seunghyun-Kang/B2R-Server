@@ -277,12 +277,13 @@ def getMomentum(request, symbol, duration):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getTradeHistory(request, id, duration):
+def getTradeHistory(request, symbol, phonenumber, duration = 365):
     today = datetime.today().strftime("%Y-%m-%d")
     lastday = (datetime.today() - timedelta(duration)).strftime("%Y-%m-%d")
-    
+    print(f"PHONE NUMBER IS : {phonenumber}")
+    _id = 'kiseyno'
     try:
-        info = TradeHistory.objects.filter(date__range=[lastday, today], id=id)
+        info = TradeHistory.objects.filter(date__range=[lastday, today], id=_id)
         serializer = TradeHistorySerializer(info, many=True)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)

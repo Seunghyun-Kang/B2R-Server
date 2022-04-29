@@ -27,5 +27,5 @@ urlpatterns = [
     path('latest_signal_triple/<str:symbol>/<int:lastday>/', views.getLastTripleScerenSignal),
     
     path('momentum/<str:symbol>/<int:duration>/', views.getMomentum),   
-    path('trade_history/<str:id>/<int:duration>/', views.getTradeHistory),
+    path('trade_history/<str:symbol>/<str:phonenumber>/<int:duration>/', views.getTradeHistory)
 ]
