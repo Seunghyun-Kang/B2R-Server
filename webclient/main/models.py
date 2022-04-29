@@ -318,7 +318,7 @@ class Momentum(models.Model):
 
 class TradeHistory(models.Model):
     hashcode = models.CharField(primary_key=True, max_length=20)
-    id = models.CharField(primary_key=True, max_length=20)
+    id = models.CharField(max_length=100, blank=True, null=True)
     date = models.DateField()
     code = models.CharField(max_length=100, blank=True, null=True)
     type = models.CharField(max_length=20, blank=True, null=True)
