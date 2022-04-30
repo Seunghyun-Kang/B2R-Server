@@ -230,7 +230,6 @@ def getLastTripleScerenSignal(request, symbol, startday, lastday):
 def getLastBollingerTrendSignal(request, symbol, startday, lastday):
     today = datetime.today().strftime("%Y-%m-%d")
     start = datetime.strptime(startday, "%Y-%m-%d")
-    daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
     last = datetime.strptime(lastday, "%Y-%m-%d")
     print("@@@@@@@@@@@@@@@@@@@@@@@")
     print(today)
