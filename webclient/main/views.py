@@ -204,18 +204,21 @@ def getRealTimePrice(request, symbol, pk):
     return Response(data)
 
 @api_view(['GET'])
-def getLastTripleScerenSignal(request, symbol, lastday):
-    today = datetime.today().strftime("%Y-%m-%d")
-    daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
+def getLastTripleScerenSignal(request, symbol, startday, lastday):
+    #today = datetime.today().strftime("%Y-%m-%d")
+    start = datetime.strptime(startday, "%Y-%m-%d")
+    # daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
+    last = datetime.strptime(lastday, "%Y-%m-%d")
+
     try:
         if symbol == "KRX":
-            info = TripleScreenSignal.objects.filter(date__range=[daybefore3, today], valid='valid')
+            info = TripleScreenSignal.objects.filter(date__range=[start, last], valid='valid')
             serializer = TripleScreenSignalSerializer(info, many=True)
         elif symbol == "NASDAQ":
-            info = TripleScreenSignalUSA.objects.filter(date__range=[daybefore3, today], valid='valid')
+            info = TripleScreenSignalUSA.objects.filter(date__range=[start, last], valid='valid')
             serializer = TripleScreenSignalSerializerUSA(info, many=True)
         elif symbol == "COIN":
-            info = TripleScreenSignalCOIN.objects.filter(date__range=[daybefore3, today], valid='valid')
+            info = TripleScreenSignalCOIN.objects.filter(date__range=[start, last], valid='valid')
             serializer = TripleScreenSignalSerializerUSA(info, many=True)
     
     except:
@@ -224,19 +227,21 @@ def getLastTripleScerenSignal(request, symbol, lastday):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getLastBollingerTrendSignal(request, symbol, lastday):
-    today = datetime.today().strftime("%Y-%m-%d")
-    daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
+def getLastBollingerTrendSignal(request, symbol, startday, lastday):
+    #today = datetime.today().strftime("%Y-%m-%d")
+    start = datetime.strptime(startday, "%Y-%m-%d")
+    # daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
+    last = datetime.strptime(lastday, "%Y-%m-%d")
     
     try:
         if symbol == "KRX":
-            info = BollingerTrendSignal.objects.filter(date__range=[daybefore3, today], valid='valid')
+            info = BollingerTrendSignal.objects.filter(date__range=[start, last], valid='valid')
             serializer = BollingerTrendSignalSerializer(info, many=True)
         elif symbol == "NASDAQ":
-            info = BollingerTrendSignalUSA.objects.filter(date__range=[daybefore3, today], valid='valid')
+            info = BollingerTrendSignalUSA.objects.filter(date__range=[start, last], valid='valid')
             serializer = BollingerTrendSignalSerializerUSA(info, many=True)
         elif symbol == "COIN":
-            info = BollingerTrendSignalCOIN.objects.filter(date__range=[daybefore3, today], valid='valid')
+            info = BollingerTrendSignalCOIN.objects.filter(date__range=[start, last], valid='valid')
             serializer = BollingerTrendSignalSerializerUSA(info, many=True)
     
     except:
@@ -245,19 +250,21 @@ def getLastBollingerTrendSignal(request, symbol, lastday):
     return Response(serializer.data)
 
 @api_view(['GET'])
-def getLastBollingerReverseSignal(request, symbol, lastday):
-    today = datetime.today().strftime("%Y-%m-%d")
-    daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
+def getLastBollingerReverseSignal(request, symbol, startday, lastday):
+    #today = datetime.today().strftime("%Y-%m-%d")
+    start = datetime.strptime(startday, "%Y-%m-%d")
+    # daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
+    last = datetime.strptime(lastday, "%Y-%m-%d")
     
     try:
         if symbol == "KRX":
-            info = BollingerReverseSignal.objects.filter(date__range=[daybefore3, today], valid = 'valid')
+            info = BollingerReverseSignal.objects.filter(date__range=[start, last], valid = 'valid')
             serializer = BollingerReverseSignalSerializer(info, many=True)
         elif symbol == "NASDAQ":
-            info = BollingerReverseSignalUSA.objects.filter(date__range=[daybefore3, today], valid = 'valid')
+            info = BollingerReverseSignalUSA.objects.filter(date__range=[start, last], valid = 'valid')
             serializer = BollingerReverseSignalSerializerUSA(info, many=True)
         elif symbol == "COIN":
-            info = BollingerReverseSignalCOIN.objects.filter(date__range=[daybefore3, today], valid = 'valid')
+            info = BollingerReverseSignalCOIN.objects.filter(date__range=[start, last], valid = 'valid')
             serializer = BollingerReverseSignalSerializerUSA(info, many=True)
     
     except:

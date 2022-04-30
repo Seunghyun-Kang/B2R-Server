@@ -22,9 +22,9 @@ urlpatterns = [
     
     path('realtime_price/<str:pk>/', views.getRealTimePrice),
     
-    path('latest_signal_trend/<str:symbol>/<int:lastday>/', views.getLastBollingerTrendSignal),
-    path('latest_signal_reverse/<str:symbol>/<int:lastday>/', views.getLastBollingerReverseSignal),
-    path('latest_signal_triple/<str:symbol>/<int:lastday>/', views.getLastTripleScerenSignal),
+    path('signal_trend/<str:symbol>/<str:startday>/<str:lastday>/', views.getLastBollingerTrendSignal),
+    path('signal_reverse/<str:symbol>/<str:startday>/<str:lastday>/', views.getLastBollingerReverseSignal),
+    path('signal_triple/<str:symbol>/<str:startday>/<str:lastday>/', views.getLastTripleScerenSignal),
     
     path('momentum/<str:symbol>/<int:duration>/', views.getMomentum),   
     path('trade_history/<str:symbol>/<str:phonenumber>/<int:duration>/', views.getTradeHistory)
