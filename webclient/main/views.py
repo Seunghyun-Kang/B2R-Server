@@ -228,11 +228,14 @@ def getLastTripleScerenSignal(request, symbol, startday, lastday):
 
 @api_view(['GET'])
 def getLastBollingerTrendSignal(request, symbol, startday, lastday):
-    #today = datetime.today().strftime("%Y-%m-%d")
+    today = datetime.today().strftime("%Y-%m-%d")
     start = datetime.strptime(startday, "%Y-%m-%d")
-    # daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
+    daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
     last = datetime.strptime(lastday, "%Y-%m-%d")
-    
+    print("@@@@@@@@@@@@@@@@@@@@@@@")
+    print(today)
+    print(start)
+    print(last)
     try:
         if symbol == "KRX":
             info = BollingerTrendSignal.objects.filter(date__range=[start, last], valid='valid')
