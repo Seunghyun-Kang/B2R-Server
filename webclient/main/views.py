@@ -231,10 +231,6 @@ def getLastBollingerTrendSignal(request, symbol, startday, lastday):
     today = datetime.today().strftime("%Y-%m-%d")
     start = datetime.strptime(startday, "%Y-%m-%d")
     last = datetime.strptime(lastday, "%Y-%m-%d")
-    print("@@@@@@@@@@@@@@@@@@@@@@@")
-    print(today)
-    print(start)
-    print(last)
     try:
         if symbol == "KRX":
             info = BollingerTrendSignal.objects.filter(date__range=[start, last], valid='valid')
