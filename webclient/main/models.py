@@ -141,7 +141,7 @@ class BollingerTrendSignal(models.Model):
     _rank = models.IntegerField(blank=True, null=True)
     _returns = models.FloatField(blank=True, null=True)
     _period_first = models.IntegerField(blank=True, null=True)
-    
+    buy_count = models.IntegerField(blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'signal_bollinger_trend'
@@ -161,6 +161,7 @@ class BollingerTrendSignalUSA(models.Model):
     _rank = models.IntegerField(blank=True, null=True)
     _returns = models.FloatField(blank=True, null=True)
     _period_first = models.IntegerField(blank=True, null=True)
+    buy_count = models.IntegerField(blank=True, null=True)
     
     class Meta:
         managed = False
@@ -196,7 +197,8 @@ class BollingerReverseSignal(models.Model):
     _rank = models.IntegerField(blank=True, null=True)
     _returns = models.FloatField(blank=True, null=True)
     _period_first = models.IntegerField(blank=True, null=True)
-    
+    buy_count = models.IntegerField(blank=True, null=True)
+
     class Meta:
         managed = False
         db_table = 'signal_bollinger_reverse'
@@ -216,6 +218,7 @@ class BollingerReverseSignalUSA(models.Model):
     _rank = models.IntegerField(blank=True, null=True)
     _returns = models.FloatField(blank=True, null=True)
     _period_first = models.IntegerField(blank=True, null=True)
+    buy_count = models.IntegerField(blank=True, null=True)
     
     class Meta:
         managed = False
