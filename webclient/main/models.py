@@ -137,9 +137,10 @@ class BollingerTrendSignal(models.Model):
     last_sell_close = models.BigIntegerField(blank=True, null=True)
     last_sell_date = models.DateField()
     first_buy_date =  models.DateField()
-    _period = models.IntegerField(blank=True, null=True)
+    _period_latest = models.IntegerField(blank=True, null=True)
     _rank = models.IntegerField(blank=True, null=True)
     _returns = models.FloatField(blank=True, null=True)
+    _period_first = models.IntegerField(blank=True, null=True)
     
     class Meta:
         managed = False
@@ -156,9 +157,10 @@ class BollingerTrendSignalUSA(models.Model):
     last_sell_close = models.FloatField(blank=True, null=True)
     last_sell_date = models.DateField()
     first_buy_date =  models.DateField()
-    _period = models.IntegerField(blank=True, null=True)
+    _period_latest = models.IntegerField(blank=True, null=True)
     _rank = models.IntegerField(blank=True, null=True)
     _returns = models.FloatField(blank=True, null=True)
+    _period_first = models.IntegerField(blank=True, null=True)
     
     class Meta:
         managed = False
@@ -190,9 +192,10 @@ class BollingerReverseSignal(models.Model):
     last_sell_close = models.BigIntegerField(blank=True, null=True)
     last_sell_date = models.DateField()
     first_buy_date =  models.DateField()
-    _period = models.IntegerField(blank=True, null=True)
+    _period_latest = models.IntegerField(blank=True, null=True)
     _rank = models.IntegerField(blank=True, null=True)
     _returns = models.FloatField(blank=True, null=True)
+    _period_first = models.IntegerField(blank=True, null=True)
     
     class Meta:
         managed = False
@@ -209,9 +212,10 @@ class BollingerReverseSignalUSA(models.Model):
     last_sell_close = models.FloatField(blank=True, null=True)
     last_sell_date = models.DateField()
     first_buy_date =  models.DateField()
-    _period = models.IntegerField(blank=True, null=True)
+    _period_latest = models.IntegerField(blank=True, null=True)
     _rank = models.IntegerField(blank=True, null=True)
     _returns = models.FloatField(blank=True, null=True)
+    _period_first = models.IntegerField(blank=True, null=True)
     
     class Meta:
         managed = False
