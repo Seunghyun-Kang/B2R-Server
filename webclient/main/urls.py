@@ -25,6 +25,8 @@ urlpatterns = [
     path('signal_trend/<str:symbol>/<str:startday>/<str:lastday>/', views.getLastBollingerTrendSignal),
     path('signal_reverse/<str:symbol>/<str:startday>/<str:lastday>/', views.getLastBollingerReverseSignal),
     path('signal_triple/<str:symbol>/<str:startday>/<str:lastday>/', views.getLastTripleScerenSignal),
+    path('signal_test1/<str:symbol>/<str:startday>/<str:lastday>/', views.getLastBollingerTest1Signal),
+    path('signal_test2/<str:symbol>/<str:startday>/<str:lastday>/', views.getLastBollingerTest2Signal),
     
     path('momentum/<str:symbol>/<int:duration>/', views.getMomentum),   
     path('trade_history/<str:symbol>/<str:phonenumber>/<int:duration>/', views.getTradeHistory)
