@@ -10,6 +10,7 @@ from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer,
 from .serializer import BollingerSerializerUSA, BollingerTrendSignalSerializerUSA, BollingerReverseSignalSerializerUSA, TripleScreenSignalSerializerUSA, TripleScreenSerializerUSA
 from .serializer import MomentumSerializer
 from .serializer import TradeHistorySerializer
+from .serializer import BollingerTest1SignalSerializer, BollingerTest2SignalSerializer
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
