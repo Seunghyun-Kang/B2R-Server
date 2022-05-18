@@ -202,6 +202,47 @@ class BollingerReverseSignal(models.Model):
     class Meta:
         managed = False
         db_table = 'signal_bollinger_reverse'
+class BollingerTest1Signal(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    type = models.CharField(max_length=20, blank=True, null=True)
+    close = models.BigIntegerField(blank=True, null=True)
+    valid = models.CharField(blank=True, null=True, max_length=10)
+    last_buy_close = models.BigIntegerField(blank=True, null=True)
+    last_buy_date = models.DateField()
+    last_sell_close = models.BigIntegerField(blank=True, null=True)
+    last_sell_date = models.DateField()
+    first_buy_date =  models.DateField()
+    _period_latest = models.IntegerField(blank=True, null=True)
+    _rank = models.IntegerField(blank=True, null=True)
+    _returns = models.FloatField(blank=True, null=True)
+    _period_first = models.IntegerField(blank=True, null=True)
+    buy_count = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'signal_test_algorithm1'
+
+class BollingerTest2Signal(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    type = models.CharField(max_length=20, blank=True, null=True)
+    close = models.BigIntegerField(blank=True, null=True)
+    valid = models.CharField(blank=True, null=True, max_length=10)
+    last_buy_close = models.BigIntegerField(blank=True, null=True)
+    last_buy_date = models.DateField()
+    last_sell_close = models.BigIntegerField(blank=True, null=True)
+    last_sell_date = models.DateField()
+    first_buy_date =  models.DateField()
+    _period_latest = models.IntegerField(blank=True, null=True)
+    _rank = models.IntegerField(blank=True, null=True)
+    _returns = models.FloatField(blank=True, null=True)
+    _period_first = models.IntegerField(blank=True, null=True)
+    buy_count = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'signal_test_algorithm2'
 
 class BollingerReverseSignalUSA(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
