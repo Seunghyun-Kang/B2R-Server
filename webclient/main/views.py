@@ -3,6 +3,7 @@ from .models import CompanyInfoNASDAQ, DailyPriceUSA, BollingerInfoUSA, Bollinge
 from .models import CompanyInfoCOIN, DailyPriceCOIN, BollingerInfoCOIN, BollingerTrendSignalCOIN, BollingerReverseSignalCOIN, TripleScreenInfoCOIN, TripleScreenSignalCOIN
 from .models import Momentum
 from .models import TradeHistory
+from .models import BollingerTest1Signal, BollingerTest2Signal
 
 from rest_framework import viewsets, status
 from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer, BollingerTrendSignalSerializer, BollingerReverseSignalSerializer, TripleScreenSignalSerializer, TripleScreenSerializer
@@ -269,7 +270,38 @@ def getLastBollingerReverseSignal(request, symbol, startday, lastday):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     return Response(serializer.data)
+@api_view(['GET'])
+def getLastBollingerTest1Signal(request, symbol, startday, lastday):
+    #today = datetime.today().strftime("%Y-%m-%d")
+    start = datetime.strptime(startday, "%Y-%m-%d")
+    # daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
+    last = datetime.strptime(lastday, "%Y-%m-%d")
+    
+    try:
+        if symbol == "KRX":
+            info = BollingerTest1Signal.objects.filter(date__range=[start, last], valid = 'valid')
+            serializer = BollingerTest1SignalSerializer(info, many=True)
+       
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
+    return Response(serializer.data)
+@api_view(['GET'])
+def getLastBollingerTest2Signal(request, symbol, startday, lastday):
+    #today = datetime.today().strftime("%Y-%m-%d")
+    start = datetime.strptime(startday, "%Y-%m-%d")
+    # daybefore3 = (datetime.today() - timedelta(lastday)).strftime("%Y-%m-%d")
+    last = datetime.strptime(lastday, "%Y-%m-%d")
+    
+    try:
+        if symbol == "KRX":
+            info = BollingerTest2Signal.objects.filter(date__range=[start, last], valid = 'valid')
+            serializer = BollingerTest2SignalSerializer(info, many=True)
+       
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    return Response(serializer.data)
 @api_view(['GET'])
 def getMomentum(request, symbol, duration):
     try:
