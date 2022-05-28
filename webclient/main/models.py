@@ -40,6 +40,17 @@ class CompanyInfoCOIN(models.Model):
         db_table = 'ticker_info'
         unique_together = (('code', 'company'),)
 
+class CompanyInfoCHINA(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    company = models.CharField(max_length=40, blank=True, null=True)
+    ticker = models.CharField(max_length=10, blank=True, null=True)
+    last_update = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'company_info_china'
+        unique_together = (('code', 'company'),)
+
 
 class DailyPrice(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
@@ -68,6 +79,20 @@ class DailyPriceUSA(models.Model):
     class Meta:
         managed = False
         db_table = 'daily_price_usa'
+
+class DailyPriceCHINA(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    open = models.FloatField(blank=True, null=True)
+    high = models.FloatField(blank=True, null=True)
+    low = models.FloatField(blank=True, null=True)
+    close = models.FloatField(blank=True, null=True)
+    diff = models.FloatField(blank=True, null=True)
+    volume = models.FloatField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'daily_price_china'
 
 class DailyPriceCOIN(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
@@ -111,6 +136,21 @@ class BollingerInfoUSA(models.Model):
     class Meta:
         managed = False
         db_table = 'bollinger_info_usa'
+
+class BollingerInfoCHINA(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    ma20 = models.FloatField(blank=True, null=True)
+    stddev = models.FloatField(blank=True, null=True)
+    upper = models.FloatField(blank=True, null=True)
+    lower = models.FloatField(blank=True, null=True)
+    pb = models.FloatField(blank=True, null=True)
+    bandwidth = models.FloatField(blank=True, null=True)
+    mfi10 = models.FloatField(blank=True, null=True)
+    iip21 = models.FloatField(blank=True, null=True)
+    class Meta:
+        managed = False
+        db_table = 'bollinger_info_china'
 
 class BollingerInfoCOIN(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
@@ -166,7 +206,49 @@ class BollingerTrendSignalUSA(models.Model):
     class Meta:
         managed = False
         db_table = 'signal_bollinger_trend_usa'
+
+class BollingerTrendSignalUSA(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    type = models.CharField(max_length=20, blank=True, null=True)
+    close = models.FloatField(blank=True, null=True)
+    valid = models.CharField(blank=True, null=True,  max_length=10)
+    last_buy_close = models.FloatField(blank=True, null=True)
+    last_buy_date = models.DateField()
+    last_sell_close = models.FloatField(blank=True, null=True)
+    last_sell_date = models.DateField()
+    first_buy_date =  models.DateField()
+    _period_latest = models.IntegerField(blank=True, null=True)
+    _rank = models.IntegerField(blank=True, null=True)
+    _returns = models.FloatField(blank=True, null=True)
+    _period_first = models.IntegerField(blank=True, null=True)
+    buy_count = models.IntegerField(blank=True, null=True)
+    
+    class Meta:
+        managed = False
+        db_table = 'signal_bollinger_trend_usa'
         
+class BollingerTrendSignalCHINA(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    type = models.CharField(max_length=20, blank=True, null=True)
+    close = models.FloatField(blank=True, null=True)
+    valid = models.CharField(blank=True, null=True,  max_length=10)
+    last_buy_close = models.FloatField(blank=True, null=True)
+    last_buy_date = models.DateField()
+    last_sell_close = models.FloatField(blank=True, null=True)
+    last_sell_date = models.DateField()
+    first_buy_date =  models.DateField()
+    _period_latest = models.IntegerField(blank=True, null=True)
+    _rank = models.IntegerField(blank=True, null=True)
+    _returns = models.FloatField(blank=True, null=True)
+    _period_first = models.IntegerField(blank=True, null=True)
+    buy_count = models.IntegerField(blank=True, null=True)
+    
+    class Meta:
+        managed = False
+        db_table = 'signal_bollinger_trend_china'
+
 class BollingerTrendSignalCOIN(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
     date = models.DateField()
@@ -264,6 +346,27 @@ class BollingerReverseSignalUSA(models.Model):
     class Meta:
         managed = False
         db_table = 'signal_bollinger_reverse_usa'
+
+class BollingerReverseSignalCHINA(models.Model):
+    code = models.CharField(primary_key=True, max_length=20)
+    date = models.DateField()
+    type = models.CharField(max_length=20, blank=True, null=True)
+    close = models.FloatField(blank=True, null=True)
+    valid = models.CharField(blank=True, null=True, max_length=10)
+    last_buy_close = models.FloatField(blank=True, null=True)
+    last_buy_date = models.DateField()
+    last_sell_close = models.FloatField(blank=True, null=True)
+    last_sell_date = models.DateField()
+    first_buy_date =  models.DateField()
+    _period_latest = models.IntegerField(blank=True, null=True)
+    _rank = models.IntegerField(blank=True, null=True)
+    _returns = models.FloatField(blank=True, null=True)
+    _period_first = models.IntegerField(blank=True, null=True)
+    buy_count = models.IntegerField(blank=True, null=True)
+    
+    class Meta:
+        managed = False
+        db_table = 'signal_bollinger_reverse_china'
 
 class BollingerReverseSignalCOIN(models.Model):
     code = models.CharField(primary_key=True, max_length=20)
