@@ -1,5 +1,6 @@
 from .models import CompanyInfo, DailyPrice, AllCompanies, BollingerInfo, BollingerTrendSignal, BollingerReverseSignal, TripleScreenInfo, TripleScreenSignal
 from .models import CompanyInfoNASDAQ, DailyPriceUSA, BollingerInfoUSA, BollingerTrendSignalUSA, BollingerReverseSignalUSA, TripleScreenInfoUSA, TripleScreenSignalUSA
+from .models import CompanyInfoCHINA, DailyPriceCHINA, BollingerInfoCHINA, BollingerTrendSignalCHINA, BollingerReverseSignalCHINA
 from .models import CompanyInfoCOIN, DailyPriceCOIN, BollingerInfoCOIN, BollingerTrendSignalCOIN, BollingerReverseSignalCOIN, TripleScreenInfoCOIN, TripleScreenSignalCOIN
 from .models import Momentum
 from .models import TradeHistory
@@ -8,6 +9,7 @@ from .models import BollingerTest1Signal, BollingerTest2Signal
 from rest_framework import viewsets, status
 from .serializer import PriceSerializer, CompanySerializer,AllCompanySerializer, BollingerSerializer, BollingerTrendSignalSerializer, BollingerReverseSignalSerializer, TripleScreenSignalSerializer, TripleScreenSerializer
 from .serializer import BollingerSerializerUSA, BollingerTrendSignalSerializerUSA, BollingerReverseSignalSerializerUSA, TripleScreenSignalSerializerUSA, TripleScreenSerializerUSA
+from .serializer import BollingerSerializerCHINA, BollingerTrendSignalSerializerCHINA, BollingerReverseSignalSerializerCHINA
 from .serializer import MomentumSerializer
 from .serializer import TradeHistorySerializer
 from .serializer import BollingerTest1SignalSerializer, BollingerTest2SignalSerializer
@@ -52,6 +54,9 @@ def getAllCompanies(request, symbol):
         elif(symbol == "NASDAQ"):
             companies = CompanyInfoNASDAQ.objects.all()
             serializer = CompanySerializer(companies, many=True)
+        elif(symbol == "CHINA"):
+            companies = CompanyInfoCHINA.objects.all()
+            serializer = CompanySerializer(companies, many=True)
         elif(symbol == "COIN"):
             companies = CompanyInfoCOIN.objects.all()
             serializer = CompanySerializer(companies, many=True)
@@ -67,6 +72,8 @@ def getPricesByCode(request,symbol ,pk):
             prices = DailyPrice.objects.filter(pk=pk)
         elif symbol == "NASDAQ":
             prices = DailyPriceUSA.objects.filter(pk=pk)
+        elif symbol == "CHINA":
+            prices = DailyPriceCHINA.objects.filter(pk=pk)
         elif symbol == "COIN":
             prices = DailyPriceCOIN.objects.filter(pk=pk)
         df = read_frame(prices)
@@ -113,6 +120,9 @@ def getBollingerByCode(request, symbol, pk):
         elif symbol == "NASDAQ":
             info = BollingerInfoUSA.objects.filter(pk=pk)
             serializer = BollingerSerializerUSA(info, many=True)
+        elif symbol == "CHINA":
+            info = BollingerInfoCHINA.objects.filter(pk=pk)
+            serializer = BollingerSerializerCHINA(info, many=True)
         elif symbol == "COIN":
             info = BollingerInfoCOIN.objects.filter(pk=pk)
             serializer = BollingerSerializerUSA(info, many=True)
@@ -130,6 +140,9 @@ def getBollingerTrendSignal(request, symbol, pk):
         elif symbol == "NASDAQ":
             info = BollingerTrendSignalUSA.objects.filter(pk=pk)
             serializer = BollingerTrendSignalSerializerUSA(info, many=True)
+        elif symbol == "CHINA":
+            info = BollingerTrendSignalCHINA.objects.filter(pk=pk)
+            serializer = BollingerTrendSignalSerializerCHINA(info, many=True)
         elif symbol == "COIN":
             info = BollingerTrendSignalCOIN.objects.filter(pk=pk)
             serializer = BollingerTrendSignalSerializerUSA(info, many=True)
@@ -147,6 +160,9 @@ def getBollingerReverseSignal(request, symbol, pk):
         elif symbol == "NASDAQ":
             info = BollingerReverseSignalUSA.objects.filter(pk=pk)
             serializer = BollingerReverseSignalSerializerUSA(info, many=True)
+        elif symbol == "CHINA":
+            info = BollingerReverseSignalCHINA.objects.filter(pk=pk)
+            serializer = BollingerReverseSignalSerializerCHINA(info, many=True)
         elif symbol == "COIN":
             info = BollingerReverseSignalCOIN.objects.filter(pk=pk)
             serializer = BollingerReverseSignalSerializerUSA(info, many=True)
@@ -240,6 +256,9 @@ def getLastBollingerTrendSignal(request, symbol, startday, lastday):
         elif symbol == "NASDAQ":
             info = BollingerTrendSignalUSA.objects.filter(date__range=[start, last], valid='valid')
             serializer = BollingerTrendSignalSerializerUSA(info, many=True)
+        elif symbol == "CHINA":
+            info = BollingerTrendSignalCHINA.objects.filter(date__range=[start, last], valid='valid')
+            serializer = BollingerTrendSignalSerializerCHINA(info, many=True)
         elif symbol == "COIN":
             info = BollingerTrendSignalCOIN.objects.filter(date__range=[start, last], valid='valid')
             serializer = BollingerTrendSignalSerializerUSA(info, many=True)
@@ -263,6 +282,9 @@ def getLastBollingerReverseSignal(request, symbol, startday, lastday):
         elif symbol == "NASDAQ":
             info = BollingerReverseSignalUSA.objects.filter(date__range=[start, last], valid = 'valid')
             serializer = BollingerReverseSignalSerializerUSA(info, many=True)
+        elif symbol == "CHINA":
+            info = BollingerReverseSignalCHINA.objects.filter(date__range=[start, last], valid = 'valid')
+            serializer = BollingerReverseSignalSerializerCHINA(info, many=True)
         elif symbol == "COIN":
             info = BollingerReverseSignalCOIN.objects.filter(date__range=[start, last], valid = 'valid')
             serializer = BollingerReverseSignalSerializerUSA(info, many=True)
@@ -282,7 +304,13 @@ def getLastBollingerTest1Signal(request, symbol, startday, lastday):
         if symbol == "KRX":
             info = BollingerTest1Signal.objects.filter(date__range=[start, last], valid = 'valid')
             serializer = BollingerTest1SignalSerializer(info, many=True)
-       
+        elif symbol == "NASDAQ":
+            info = BollingerTest1Signal.objects.filter(date__range=[start, last], valid = 'valid')
+            serializer = BollingerTest1SignalSerializer(info, many=True)
+        elif symbol == "CHINA":
+            info = BollingerTest1Signal.objects.filter(date__range=[start, last], valid = 'valid')
+            serializer = BollingerTest1SignalSerializer(info, many=True)
+
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -298,7 +326,13 @@ def getLastBollingerTest2Signal(request, symbol, startday, lastday):
         if symbol == "KRX":
             info = BollingerTest2Signal.objects.filter(date__range=[start, last], valid = 'valid')
             serializer = BollingerTest2SignalSerializer(info, many=True)
-       
+        elif symbol == "NASDAQ":
+            info = BollingerTest1Signal.objects.filter(date__range=[start, last], valid = 'valid')
+            serializer = BollingerTest1SignalSerializer(info, many=True)
+        elif symbol == "CHINA":
+            info = BollingerTest1Signal.objects.filter(date__range=[start, last], valid = 'valid')
+            serializer = BollingerTest1SignalSerializer(info, many=True)
+
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
