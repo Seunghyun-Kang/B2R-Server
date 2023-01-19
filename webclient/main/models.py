@@ -493,3 +493,14 @@ class TradeHistory(models.Model):
     class Meta:
         managed = False
         db_table = 'trade_history'
+
+class FearAndGreedIndexUSA(models.Model):
+    date = models.DateField(primary_key=True)
+    now_value = models.IntegerField(blank=True, null=True)
+    week_ago_value = models.IntegerField(blank=True, null=True)
+    month_ago_value = models.IntegerField(blank=True, null=True)
+    year_ago_value = models.IntegerField(blank=True, null=True)
+    
+    class Meta:
+        managed = False
+        db_table = 'fear_and_greed_index_usa'
