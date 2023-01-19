@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'main',
     'rest_framework',
+    'django_apscheduler'
 ]
 TIME_ZONE = 'Asia/Seoul'
 
@@ -172,3 +173,6 @@ if DEBUG:
     for logger in LOGGING['loggers']:
         LOGGING['loggers'][logger]['handlers'] = ['console'] 
 
+
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"  # Default
+SCHEDULER_DEFAULT = True
