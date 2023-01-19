@@ -19,7 +19,6 @@ from rest_framework.response import Response
 import logging, json
 from django_pandas.io import read_frame
 from .modules import PortfolioOptimization as po
-from .modules import Momentum as m
 import pandas as pd
 from functools import reduce
 from.modules import GetRealTimePrices as gr
