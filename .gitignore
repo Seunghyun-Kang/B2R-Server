@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 webclient/main/config.ini
+webclient/main/migrations/
